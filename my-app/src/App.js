@@ -44,55 +44,78 @@ const App = () => {
     }));
   };
 
+  const resetGame = () => {
+    setPlayerChoice(null);
+    setBotChoice(null);
+    setResult('');
+  };
+
   return (
     <div className="game-container">
       <h1>Rock Paper Scissors</h1>
-      
-      <div className="score-board">
-        <div className="score-item wins">Wins: {score.wins}</div>
-        <div className="score-item ties">Ties: {score.ties}</div>
-        <div className="score-item losses">Losses: {score.losses}</div>
-      </div>
 
-      <div className="choices-container">
-        <div className="choice-section">
-          <h3>Your Choice</h3>
-          <div className="choice-display">
-            {playerChoice ? playerChoice.emoji : '❓'}
+      {/* Only show game UI if not win/lose */}
+      {(result !== 'win' && result !== 'lose') && (
+        <>
+          <div className="score-board">
+            <div className="score-item wins">Wins: {score.wins}</div>
+            <div className="score-item ties">Ties: {score.ties}</div>
+            <div className="score-item losses">Losses: {score.losses}</div>
           </div>
-        </div>
-        
-        <div className="vs">VS</div>
-        
-        <div className="choice-section">
-          <h3>Bot's Choice</h3>
-          <div className="choice-display">
-            {botChoice ? botChoice.emoji : '❓'}
-          </div>
-        </div>
-      </div>
 
-      {result && (
-        <div className={`result ${result}`}>
-          {result === 'win' && '🎉 You Win!'}
-          {result === 'tie' && '🤝 It\'s a Tie!'}
-          {result === 'lose' && '🤖 Bot Wins!'}
-        </div>
+          <div className="choices-container">
+            <div className="choice-section">
+              <h3>Your Choice</h3>
+              <div className="choice-display">
+                {playerChoice ? playerChoice.emoji : '❓'}
+              </div>
+            </div>
+
+            <div className="vs">VS</div>
+
+            <div className="choice-section">
+              <h3>Bot's Choice</h3>
+              <div className="choice-display">
+                {botChoice ? botChoice.emoji : '❓'}
+              </div>
+            </div>
+          </div>
+
+          {result && result === 'tie' && (
+            <div className="result tie">
+              🤝 It's a Tie!
+            </div>
+          )}
+
+          <div className="buttons-container">
+            {choices.map((choice) => (
+              <button
+                key={choice.name}
+                className="choice-button"
+                onClick={() => playGame(choice)}
+              >
+                <span className="choice-emoji">{choice.emoji}</span>
+                <span className="choice-name">{choice.name}</span>
+              </button>
+            ))}
+          </div>
+        </>
       )}
 
-      <div className="buttons-container">
-        {choices.map((choice) => (
-          <button
-            key={choice.name}
-            className="choice-button"
-            onClick={() => playGame(choice)}
-          >
-            <span className="choice-emoji">{choice.emoji}</span>
-            <span className="choice-name">{choice.name}</span>
-          </button>
-        ))}
-      </div>
-
+      {/* Overlay screen for win or lose */}
+      {(result === 'win' || result === 'lose') && (
+        <div className="overlay-screen">
+          <img 
+            src={result === 'win' ? 'happywin.gif' : 'sadloser.gif'}
+            alt={result === 'win' ? 'Trophy' : 'Sad Bot'}
+            className="overlay-image"
+          />
+          <div className="overlay-text">
+            {result === 'win' ? '🎉 You Win!' : '😢 You Lose!'}
+          </div>
+          <button onClick={resetGame}>Play Again</button>
+        </div>
+      )}
     </div>
   );
 };
