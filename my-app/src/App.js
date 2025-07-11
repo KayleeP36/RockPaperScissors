@@ -28,6 +28,11 @@ const App = () => {
     
     return winConditions[player.name] === bot.name ? 'win' : 'lose';
   };
+const resetGame = () => {
+  setPlayerChoice(null);
+  setBotChoice(null);
+  setResult('');
+};
 
   const playGame = (playerChoice) => {
     const botChoice = getRandomChoice();
@@ -92,9 +97,19 @@ const App = () => {
           </button>
         ))}
       </div>
-
+{(result === 'win' || result === 'lose') && (
+      <div className="overlay-screen">
+        <div className="overlay-content">
+          {result === 'win' ? '🎉 You Win!' : '😢 You Lose!'}
+          <button onClick={resetGame}>Play Again</button>
+        </div>
+      </div>
+    )}
     </div>
+
+    
   );
+
 };
 
 export default App;
