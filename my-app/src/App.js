@@ -106,7 +106,7 @@ const App = () => {
       {(result === 'win' || result === 'lose') && (
         <div className="overlay-screen">
           <img 
-            src={result === 'win' ? 'happywin.gif' : 'sadlose.png'}
+            src={result === 'win' ? 'happywin.gif' : 'sadloser.gif'}
             alt={result === 'win' ? 'Trophy' : 'Sad Bot'}
             className="overlay-image"
           />
