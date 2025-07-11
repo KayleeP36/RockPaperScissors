@@ -169,27 +169,52 @@ h1 {
     width: 200px;
   }
 
-  .overlay-screen {
+ .overlay-screen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.85);
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  font-size: 2rem;
+  font-size: 2.5rem;
   z-index: 999;
+  text-align: center;
+  padding: 2rem;
 }
 
-.overlay-screen button {
+.overlay-content img.overlay-image {
+  width: 50px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.overlay-content button {
   margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 15px 30px;
+  font-size: 1.2rem;
   cursor: pointer;
+  border: none;
+  background: #ffcc00;
+  color: #000;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.overlay-content button:hover {
+  background: #ffdd33;
+}
+
+/* Define the fadeInOut animation */
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 }
